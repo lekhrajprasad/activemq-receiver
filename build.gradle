@@ -1,0 +1,45 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.lpras.jmsamq'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+    /*flatDir {
+        dirs 'libs'
+    }*/
+	mavenLocal()
+	mavenCentral()
+} 
+
+dependencies {
+	//implementation files('email-service-0.0.1-SNAPSHOT.jar')
+	//implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation ("com.lpras.email:email-service:0.0.1-SNAPSHOT")
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	
+}
+
+test {
+	useJUnitPlatform()
+}
